@@ -3,57 +3,74 @@
 // var {Text, View, AppRegistry} = React;
 
 //Import Required Code
+var formatTime = require('minutes-seconds-milliseconds');
 var React = require('react');
 var {Text, View, TouchableHighlight, AppRegistry, StyleSheet} = require('react-native')
 
 
 var StopWatch = React.createClass({
+
+  getInitialState: function(){
+    return {
+      timeElapsed: null,
+      running: false,
+      startStopLabel: 'Start'
+    }
+  },
+
   render: function(){
     return <View style={styles.container}>{/* Parent View */}
-      <View style={[styles.header, this.border('yellow')]}>
-        <View style={[styles.timerWrapper, this.border("red")]}>
-          <Text>
-            00:00.00
+      <View style={[styles.header]}>
+        <View style={[styles.timerWrapper]}>
+          <Text style={[styles.timer]}>
+            {formatTime(this.state.timeElapsed)}
           </Text>
         </View>
-        <View style={[styles.buttonWrapper, this.border('green')]}>
+        <View style={[styles.buttonWrapper]}>
           {this.startStopButton()}
           {this.lapButton()}
         </View>
       </View>
-      <View style = {[styles.footer, this.border('blue')]}>
+      <View style = {[styles.footer]}>
         <Text>I am a view of laps ... </Text>
       </View>
     </View>
   },
 
   startStopButton: function(){
+    var style = this.state.running ? styles.stopButton : styles.startButton;
+
     return <TouchableHighlight
       underlayColor='gray'
       onPress={()=>{this.handleStartPressed()}}
+      style = {[styles.button, style]}
       >
       <Text>
-        Start
+        {this.state.running ? 'Stop' : 'Start'}
       </Text>
     </TouchableHighlight>
   },
   lapButton: function(){
-    return <TouchableHighlight>
+    return <TouchableHighlight style={styles.button}>
       <Text>
         Lap
       </Text>
     </TouchableHighlight>
   },
 
-  border: function(color){
-    return{
-      borderColor: color,
-      borderWidth: 4
-    }
-  },
-
   handleStartPressed: function(){
-    console.log("You pressed the Start button")
+    if(this.state.running){
+      clearInterval(this.interval);
+      this.setState({running: false, startStopLabel: 'Start'})
+      return
+    }
+    var startTime = new Date();
+    this.interval = setInterval(()=>{
+    this.setState({
+      timeElapsed: new Date() - startTime,
+      running: true,
+      startStopLabel: 'Stop'
+    })}, 30);
   }
 });
 
@@ -82,6 +99,23 @@ var styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: 'center'
+  },
+  timer: {
+    fontSize: 60
+  },
+  button: {
+    borderWidth: 2,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  startButton: {
+    borderColor: '#00cc00'
+  },
+  stopButton: {
+    borderColor: '#cc0000'
   }
 
 });
