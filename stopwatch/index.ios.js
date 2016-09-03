@@ -14,7 +14,11 @@ var StopWatch = React.createClass({
     return {
       timeElapsed: null,
       running: false,
-      startStopLabel: 'Start'
+      startStopLabel: 'Start',
+      startTime: null,
+      lapButtonPushed: false,
+      lapCount: 0,
+      lapArr: []
     }
   },
 
@@ -32,7 +36,7 @@ var StopWatch = React.createClass({
         </View>
       </View>
       <View style = {[styles.footer]}>
-        <Text>I am a view of laps ... </Text>
+        <Text>List of laps ... </Text>
       </View>
     </View>
   },
@@ -51,9 +55,12 @@ var StopWatch = React.createClass({
     </TouchableHighlight>
   },
   lapButton: function(){
-    return <TouchableHighlight style={styles.button}>
+    return <TouchableHighlight
+      onPress={()=>{this.handleLapPressed()}}
+      style={styles.button}
+      >
       <Text>
-        Lap
+        Lap {this.state.lapCount}
       </Text>
     </TouchableHighlight>
   },
@@ -64,15 +71,27 @@ var StopWatch = React.createClass({
       this.setState({running: false, startStopLabel: 'Start'})
       return
     }
-    var startTime = new Date();
+    this.setState({startTime: new Date()});
     this.interval = setInterval(()=>{
     this.setState({
-      timeElapsed: new Date() - startTime,
+      timeElapsed: new Date() - this.state.startTime,
       running: true,
       startStopLabel: 'Stop'
     })}, 30);
+  },
+
+handleLapPressed: function(){
+  if(this.state.running){
+    var lap = this.state.timeElapsed
+    this.setState({
+      startTime: new Date(),
+      lapCount: this.state.lapCount + 1
+    });
   }
-});
+    return
+  }
+
+}); //End StopWatch
 
 var styles = StyleSheet.create({
 
