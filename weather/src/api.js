@@ -1,6 +1,6 @@
 var wxAPIKey = require('../secrets/wxAPIKey');
 
-var rootURL = 'api.openweathermap.org/data/2.5/weather?'
+var rootUrl = 'http://api.openweathermap.org/data/2.5/weather';
 
 var kelvinToF = function(tempK){
   var celsius = tempK-273.15;
@@ -8,20 +8,22 @@ var kelvinToF = function(tempK){
   return Math.round(tempF) + ' ˚F';
 }
 
-modules.export = function (latitude, longitude){
-  var url = `${rootURL}APPID=${wxAPIKey}&lat=${latitude}&lon=${longitude}`;
+module.exports = function (latitude, longitude){
+  var url = `${rootUrl}?APPID=${wxAPIKey}&lat=${latitude}&lon=${longitude}`;
+  console.log(url);
+  // fetch(url).then(function(response){console.log(response);});
 
-  fetch(url)
-    .then(function(response){
-      return response.json()
-    })
-    .then(function(json){
-      return {
-        city: json.name,
-        temperature: kelvinToF(json.main.temp),
-        description: json.weather[0].description
-      }
-    });
+  return fetch(url)
+      .then(function(response){
+        return response.json();
+      })
+      .then(function(json){
+        return {
+          city: json.name,
+          temperature: kelvinToF(json.main.temp),
+          description: json.weather[0].description
+        }
+      });
 
 
 }

@@ -6,13 +6,17 @@
 var React = require('react');
 var {Text, View, MapView, AppRegistry, StyleSheet} = require('react-native')
 
+var Api = require('./src/api');
 
 var Weather = React.createClass({
 
 
   getInitialState: function(){
     return {
-      pin: {latitude: 40.6461, longitude: -111.4980}
+      pin: {latitude: 40.6461, longitude: -111.4980},
+      city: '',
+      temperature: '',
+      description: ''
     }
   },
 
@@ -25,13 +29,17 @@ var Weather = React.createClass({
       ></MapView>
   },
   onRegionChangeComplete: function(region){
-    console.log(region);
     this.setState({
       pin: {
         latitude: region.latitude,
         longitude: region.longitude
       }
     });
+      Api(region.latitude, region.longitude)
+      .then((data)=>{       //use fat arrow fn to pass thru "this" (the component)
+        this.setState(data);
+        console.log(data);
+      });
   },
 
 
