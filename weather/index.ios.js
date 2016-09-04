@@ -31,9 +31,9 @@ var Weather = React.createClass({
         latitude: region.latitude,
         longitude: region.longitude
       }
-    })
+    });
+  },
 
-  }
 
 
 }); //End Weather
