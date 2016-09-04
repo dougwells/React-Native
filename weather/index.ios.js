@@ -9,13 +9,31 @@ var {Text, View, MapView, AppRegistry, StyleSheet} = require('react-native')
 
 var Weather = React.createClass({
 
+
   getInitialState: function(){
     return {
     }
   },
 
   render: function(){
-    return <MapView style={styles.map}></MapView>
+
+    var pins = [
+      {
+        latitude: 40.6461,
+        longitude: -111.4980
+      }
+
+    ];
+
+    return <MapView
+      annotations = {pins}
+      onRegionChangeComplete = {this.onRegionChangeComplete}
+      style={styles.map}
+      ></MapView>
+  },
+  onRegionChangeComplete: function(region){
+    console.log(region);
+
   }
 
 
