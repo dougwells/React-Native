@@ -22,11 +22,18 @@ var Weather = React.createClass({
 
   render: function(){
 
-    return <MapView
-      annotations = {[this.state.pin]}
-      onRegionChangeComplete = {this.onRegionChangeComplete}
-      style={styles.map}
-      ></MapView>
+    return <View style = {styles.container}>
+      <MapView
+        annotations = {[this.state.pin]}
+        onRegionChangeComplete = {this.onRegionChangeComplete}
+        style={styles.map}
+        ></MapView>
+      <View style={styles.textWrapper}>
+        <Text style={styles.text}>{this.state.city}</Text>
+        <Text style={styles.text}>{this.state.temperature}</Text>
+        <Text style={styles.text}>{this.state.description}</Text>
+      </View>
+    </View>
   },
   onRegionChangeComplete: function(region){
     this.setState({
@@ -38,7 +45,6 @@ var Weather = React.createClass({
       Api(region.latitude, region.longitude)
       .then((data)=>{       //use fat arrow fn to pass thru "this" (the component)
         this.setState(data);
-        console.log(data);
       });
   },
 
@@ -47,11 +53,23 @@ var Weather = React.createClass({
 }); //End Weather
 
 var styles = StyleSheet.create({
-
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    backgroundColor: '#F5FCFF'
+  },
   map: {
-    flex: 1,  //Fill entire screen
+    flex: 2,  //Fill two-thirds of screen
+    marginTop: 30
+  },
+  textWrapper: {
+    flex: 1,  //Fill one-third of screen
+    alignItems: 'center'
+  },
+  text: {
+    fontSize: 30
   }
-
 });
 
 AppRegistry.registerComponent('weather', ()=>Weather);
