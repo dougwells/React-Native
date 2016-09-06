@@ -6,6 +6,8 @@ var {
   TextInput
 } = require('react-native');
 
+var Button = require('../common/button')
+
 module.exports = React.createClass({
   render: function(){
     return(
@@ -15,9 +17,12 @@ module.exports = React.createClass({
         <TextInput style={styles.input}></TextInput>
         <Text style={styles.label}>Password:</Text>
         <TextInput secureTextEntry={true} style={styles.input}></TextInput>
-
+        <Button text={"Sign In"} onPress={this.onPress}></Button>
       </View>
     );
+  },
+  onPress: function(){
+    //sign the user in
   }
 });
 
