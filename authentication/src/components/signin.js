@@ -9,14 +9,34 @@ var {
 var Button = require('../common/button')
 
 module.exports = React.createClass({
+  getInitialState: function(){
+    return {
+      username:'',
+      password: ''
+    }
+  },
+
   render: function(){
     return(
       <View style={styles.container}>
         <Text>Sign-in Below:</Text>
-        <Text style={styles.label}>Username:</Text>
-        <TextInput style={styles.input}></TextInput>
+
+        <Text
+        style={styles.label}>Username:</Text>
+        <TextInput
+        style={styles.input}
+        onChangeText = {(text)=>this.setState({username: text})}
+        value = {this.state.username}
+        ></TextInput>
+
         <Text style={styles.label}>Password:</Text>
-        <TextInput secureTextEntry={true} style={styles.input}></TextInput>
+        <TextInput
+        secureTextEntry={true}
+        style={styles.input}
+        onChangeText = {(pw)=>this.setState({password: pw})}
+        value = {this.state.password}
+        >
+        </TextInput>
         <Button text={"Sign In"} onPress={this.onPress}></Button>
       </View>
     );
