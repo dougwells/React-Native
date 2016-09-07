@@ -38,8 +38,15 @@ module.exports = React.createClass({
         >
         </TextInput>
         <Button text={"Sign In"} onPress={this.onPress}></Button>
+        <Button text={"I need an account"} onPress={this.onSignupPress}></Button>
       </View>
     );
+  },
+  onSignupPress: function(){
+    //navigate to signUp
+    // ideal: --> navigator.push() but need ref to navigator
+    // (we can pass via props in main.js when render Component)
+    this.props.navigator.push({name: 'signup'});
   },
   onPress: function(){
     //sign the user in
