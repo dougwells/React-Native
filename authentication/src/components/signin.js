@@ -49,6 +49,7 @@ module.exports = React.createClass({
     this.props.navigator.push({name: 'signup'});
   },
   onPress: function(){
+    this.props.navigator.push({name: 'welcome'})
     //sign the user in
   }
 });

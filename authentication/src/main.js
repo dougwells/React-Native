@@ -6,10 +6,12 @@ var {
 
 var Signin = require('./components/signin');
 var Signup = require('./components/signup');
+var Welcome = require('./components/welcome');
 
 var ROUTES = {
   signin: Signin,
-  signup: Signup
+  signup: Signup,
+  welcome: Welcome
 }
 
 module.exports = React.createClass({

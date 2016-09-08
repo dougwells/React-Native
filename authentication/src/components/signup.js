@@ -14,7 +14,8 @@ module.exports = React.createClass({
     return {
       username:'',
       password:'',
-      passwordConfirmation: ''
+      passwordConfirmation: '',
+      errorMessage:''
     }
   },
 
@@ -22,7 +23,9 @@ module.exports = React.createClass({
     return (
       <View style={styles.container}>
         <Text>New Users {'\n'}
-        Sign in Below:</Text>
+        Sign in Below:
+        {'\n'}
+        </Text>
 
         <Text
         style={styles.label}>Username:</Text>
@@ -49,21 +52,26 @@ module.exports = React.createClass({
         value = {this.state.passwordConfirmation}
         >
         </TextInput>
+        <Text style={styles.label}>{this.state.errorMessage}</Text>
 
         <Button text={"Join Now!"} onPress={this.onPress}></Button>
-        <Button text={"Oops .. I have account"} onPress={this.onSignInPress}></Button>
+        <Button text={"Oops .. I have account"} onPress={this.onSignupPress}></Button>
       </View>
 
     );
   },
 
-  onSignInPress: function(){
+  onSignupPress: function(){
     this.props.navigator.pop();
   },
 
   onPress: function(){
+    if(this.state.password !== this.state.passwordConfirmation){
+      return this.setState({errorMessage: "Passwords do not match"});
+    }
     console.log('SignUp Initiated')
-  }
+    this.props.navigator.immediatelyResetRouteStack([{name:'welcome'}]);
+  },
 
 })
 
