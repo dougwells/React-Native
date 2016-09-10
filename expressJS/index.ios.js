@@ -8,11 +8,21 @@ var {
   View,
 } = require('react-native');
 
+import TaskList from './Tasklist';
+
 var ToDo = React.createClass({
+  getInitialState: function(){
+    return {
+    todos: [
+      {task: 'learn React Native'}
+
+    ]
+  }
+  },
   render: function(){
     return(
-      <View>
-        <Text>Hello World! ... again</Text>
+      <View style={styles.container}>
+        <TaskList />
       </View>
     );
   }
