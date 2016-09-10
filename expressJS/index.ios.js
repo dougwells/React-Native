@@ -1,34 +1,22 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-'use strict';
-import React, {
+
+var React = require('react');
+var {
   AppRegistry,
   Component,
   StyleSheet,
   Text,
-  View
-} from 'react-native';
+  View,
+} = require('react-native');
 
-class expressJS extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+var ToDo = React.createClass({
+  render: function(){
+    return(
+      <View>
+        <Text>Hello World! ... again</Text>
       </View>
     );
   }
-}
+});
 
 const styles = StyleSheet.create({
   container: {
@@ -49,4 +37,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('expressJS', () => expressJS);
+AppRegistry.registerComponent('expressJS', () => ToDo);
