@@ -15,8 +15,8 @@ var ToDo = React.createClass({
   getInitialState: function(){
     return {
     todos: [
-      {task: 'Learn React Native', completed: false},
-      {task: 'My second todo', completed: false}
+      {task: '- Learn React Native', completed: false},
+      {task: '- My second todo', completed: false}
     ]
   }
   },
