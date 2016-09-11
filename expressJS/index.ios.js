@@ -8,14 +8,15 @@ var {
   View,
 } = require('react-native');
 
-import TaskList from './Tasklist';
+import TaskList from './src/components/Tasklist';
+import Task2 from './src/components/Task2'
 
 var ToDo = React.createClass({
   getInitialState: function(){
     return {
     todos: [
-      {task: 'learn React Native'}
-
+      {task: 'Learn React Native', completed: false},
+      {task: 'My second todo', completed: false}
     ]
   }
   },
@@ -23,6 +24,7 @@ var ToDo = React.createClass({
     return(
       <View style={styles.container}>
         <TaskList />
+        <Task2 todos={this.state.todos}/>
       </View>
     );
   }
