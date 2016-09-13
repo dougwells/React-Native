@@ -6,46 +6,49 @@ import {
 } from 'react-native';
 
 module.exports = React.createClass({
+  getInitialState (){
+    return ({
+      tasks: ['Take out trash', 'Grocery shop', 'Exercise']
+    });
+  },
+
+  renderList (tasks){
+    return tasks.map((task)=>{
+      return (
+        <View key={task} style={styles.task}>
+          <Text>{task}</Text>
+        </View>
+        );
+    });
+  },
+
   render(){
     return(
         <View style={styles.container}>
-          <View style={styles.item}>
-            <Text>Item 1</Text>
-          </View>
-          <View style={styles.item}>
-            <Text>Item 2</Text>
-          </View>
-          <View style={styles.largeItem}>
-            <View style={styles.item}>
-              <Text>Item 3a</Text>
-            </View>
-            <View style={styles.item}>
-              <Text>Item 3a</Text>
-            </View>
-          </View>
-        </View>
+          <Text style={styles.header}>Todo Master</Text>
+          {this.renderList(this.state.tasks)}
+      </View>
     )
   }
 });
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'row',
-    borderWidth: 3,
-    borderColor: 'green'
+    flex: 1
+
   },
-  item: {
-    flex: 1,
-    borderWidth: 3,
-    borderColor: 'red',
-    alignItems: 'center',
-    justifyContent: 'center'
+  header: {
+    margin: 30,
+    marginTop: 40,
+    textAlign: 'center',
+    fontSize: 18
   },
-  largeItem: {
-    flex: 2,
-    borderWidth: 3,
-    borderColor: 'blue'
+  task: {
+    borderWidth: 1,
+    borderColor: 'blue',
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 
 });
