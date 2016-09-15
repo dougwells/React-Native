@@ -5,7 +5,8 @@ import {
   TextInput,
   StyleSheet,
   ScrollView,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 
 module.exports = React.createClass({
@@ -14,6 +15,37 @@ module.exports = React.createClass({
       tasks: ['Take out trash', 'Grocery shop', 'Exercise'],
       completedTasks: [],
     });
+  },
+
+  componentWillMount(){
+    // this.setStorage(); //Should not need. Run if default ToDos do not load on app initiation
+    AsyncStorage.getItem('tasks')
+      .then((response)=>{
+        if(response){
+          this.setState({tasks: JSON.parse(response)});
+        }else{
+          console.log("Async for tasks returned null");
+          this.state.tasks;
+        }
+      });
+      AsyncStorage.getItem('completedTasks')
+        .then((response)=>{
+          if(response){
+            this.setState({completedTasks: JSON.parse(response)});
+          }else{
+            console.log("Async for CompletedTasks returned null");
+            this.state.completedTasks;
+          }
+        });
+  },
+  componentDidUpdate(){
+    this.setStorage()
+  },
+
+  setStorage(){
+    AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks));
+    AsyncStorage.setItem('completedTasks', JSON.stringify(this.state.completedTasks));
+    console.log("Tasks & Completed saved to AsyncStorage")
   },
 
   renderList (tasks){
@@ -60,8 +92,8 @@ module.exports = React.createClass({
   removeTask(task, index){
     let completedArr = this.state.completedTasks;
     completedArr.splice(index,1);
-    this.setState({completedTasks: completedArr})
-    console.log('completed & saved:', this.state.completedTasks)
+    this.setState({completedTasks: completedArr});
+    console.log('completed & saved:', this.state.completedTasks);
   },
 
   render(){
@@ -79,7 +111,7 @@ module.exports = React.createClass({
               this.setState({
                 tasks: this.state.tasks.concat([this.state.task]),
                 task: ''
-              })
+              });
             }}
             >
           </TextInput>
