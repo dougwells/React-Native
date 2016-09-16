@@ -45,7 +45,6 @@ module.exports = React.createClass({
   setStorage(){
     AsyncStorage.setItem('tasks', JSON.stringify(this.state.tasks));
     AsyncStorage.setItem('completedTasks', JSON.stringify(this.state.completedTasks));
-    console.log("Tasks & Completed saved to AsyncStorage")
   },
 
   renderList (tasks){
@@ -87,13 +86,11 @@ module.exports = React.createClass({
     let completedTask = newTasks.splice(index,1);
     completedTasks = this.state.completedTasks.concat(completedTask);
     this.setState({tasks: newTasks, completedTasks})
-    console.log('completed:', this.state.completedTasks)
   },
   removeTask(task, index){
     let completedArr = this.state.completedTasks;
     completedArr.splice(index,1);
     this.setState({completedTasks: completedArr});
-    console.log('completed & saved:', this.state.completedTasks);
   },
 
   render(){
