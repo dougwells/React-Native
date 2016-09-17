@@ -2,6 +2,10 @@
 #
 .DS_Store
 
+# Secrets
+secrets/
+key.*
+
 # Xcode
 #
 build/
