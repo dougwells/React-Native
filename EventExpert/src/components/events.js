@@ -45,6 +45,17 @@ module.exports = React.createClass({
       console.log('responseJSON', responseJSON);
     });
   },
+
+  detail(rowData){
+    this.props.navigator.push({
+      name: 'eventDetail',
+      title: rowData.name.text,
+      description: rowData.description.text,
+      url: rowData.url,
+      img: rowData.logo.url
+    })
+  },
+
   renderRow(rowData) {
     const defaultImg = 'https://cdn.vectorstock.com/i/composite/31,80/question-mark-vector-543180.jpg';
     let img = rowData.logo ? rowData.logo.url : defaultImg;
@@ -66,7 +77,7 @@ module.exports = React.createClass({
           <TouchableOpacity>
             <Text
               style={styles.link}
-              onPress={()=>this.props.navigator.push({name: 'eventDetail'})}
+              onPress={()=>this.detail(rowData)}
             >
               More Details</Text>
           </TouchableOpacity>
