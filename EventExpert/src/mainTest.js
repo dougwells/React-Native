@@ -1,26 +1,26 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
-  View,
   Text,
-  Image,
+  TextInput,
+  View,
+  StyleSheet,
   ListView,
-  StyleSheet
+  Image,
+  TouchableOpacity
 } from 'react-native';
+
 
 import API_KEY from '../secrets/api'
 const ROOT_URL = 'https://www.eventbriteapi.com/v3/events/search/';
 const ds = new ListView.DataSource({rowHasChanged: (r1,r2)=>r1 !== r2});
 
 module.exports = React.createClass({
-  getInitialState(){
-    return{
-      dataSource: ds.cloneWithRows([
-        {
-          name: {text: 'Event 1'},
-          url: 'www.google.com'
-        }
-      ])
-    }
+  getInitialState() {
+    return ({
+      dataSource: ds.cloneWithRows([]),
+      eventType: '',
+      city: ''
+    })
   },
 
   componentDidMount(){
@@ -41,10 +41,12 @@ module.exports = React.createClass({
       console.log('responseJSON', responseJSON);
     });
   },
+
+
   renderRow(rowData) {
-    const defaultImg = 'https://cdn.vectorstock.com/i/composite/31,80/question-mark-vector-543180.jpg';
-    let img = rowData.logo ? rowData.logo.url : defaultImg;
-    console.log(img);
+    const defaultImg = 'https://pixabay.com/static/uploads/photo/2014/08/21/19/43/question-423604__180.png';
+    let img = rowData.logo != null ? rowData.logo.url : defaultImg;
+
     return (
       <View style={styles.row}>
         <Image
@@ -53,45 +55,51 @@ module.exports = React.createClass({
         />
         <View style={styles.rowDetails}>
           <Text>
-            {
-              rowData.name.text.length > 30 ?
-              rowData.name.text.substring(0,30) + '...':
+            {rowData.name.text.length > 30 ?
+              `${rowData.name.text.substring(0, 30)}...` :
               rowData.name.text
             }
           </Text>
-          <Text>More Details</Text>
+            <Text style={styles.link}>
+              more details
+            </Text>
         </View>
       </View>
     )
   },
 
-  render(){
-    return(
+  render() {
+    return (
       <View style={styles.container}>
-        <Text style={styles.title}>Welcome to Event Expert</Text>
+        <Text style={styles.title}>
+          Event Expert
+        </Text>
         <ListView
-          dataSource={this.state.dataSource}
-          renderRow={(rowData)=>this.renderRow(rowData)}
-          enableEmptySections={true}
           style={styles.list}
-          />
+          dataSource={this.state.dataSource}
+          enableEmptySections={true}
+          renderRow={(rowData) => this.renderRow(rowData)}
+        />
       </View>
     )
   }
-});
+})
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
   },
   title: {
-    flex:1,
+    flex: 1,
     marginTop: 40,
     textAlign: 'center',
-    color: 'red'
+    fontSize: 20
+  },
+  form: {
+    flex: 4,
   },
   list: {
-    flex:8
+    flex: 10
   },
   row: {
     flex: 1,
@@ -99,15 +107,39 @@ const styles = StyleSheet.create({
     padding: 5
   },
   rowDetails: {
-    flex:5,
+    flex: 5,
     justifyContent: 'center',
     alignItems: 'center'
   },
   rowLogo: {
     flex: 1,
-    height: 50,
     width: 50,
+    height: 50,
     borderColor: '#000',
     borderWidth: 1
+  },
+  input: {
+    flex: 1,
+    borderColor: '#000',
+    borderRadius: 5,
+    borderWidth: 1,
+    margin: 5,
+    textAlign: 'center'
+  },
+  buttonContainer: {
+    flex: 1,
+    padding: 5
+  },
+  button: {
+    flex: 1,
+    borderColor: '#0000FF',
+    borderRadius: 5,
+    borderWidth: 1,
+    textAlign: 'center',
+    padding: 10,
+    color: '#0000FF'
+  },
+  link: {
+    color: '#0000FF'
   }
 })
