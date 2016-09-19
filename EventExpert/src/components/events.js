@@ -55,7 +55,6 @@ module.exports = React.createClass({
     const defaultImg = 'https://t1.ftcdn.net/jpg/00/36/94/26/500_F_36942622_9SUXpSuE5JlfxLFKB1jHu5Z07eVIWQ2W.jpg';
     // const defaultImg = 'https://cdn.vectorstock.com/i/composite/31,80/question-mark-vector-543180.jpg';
     let img = rowData.logo ? rowData.logo.url : defaultImg;
-    console.log(img);
     return (
       <View style={styles.row}>
         <TouchableOpacity
