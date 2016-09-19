@@ -18,12 +18,7 @@ module.exports = React.createClass({
     return{
       eventType: 'hackathon',
       city: 'San Francisco',
-      dataSource: ds.cloneWithRows([
-        {
-          name: {text: 'Event 1'},
-          url: 'www.google.com'
-        }
-      ])
+      dataSource: ds.cloneWithRows([])
     }
   },
 
@@ -57,15 +52,20 @@ module.exports = React.createClass({
   },
 
   renderRow(rowData) {
-    const defaultImg = 'https://cdn.vectorstock.com/i/composite/31,80/question-mark-vector-543180.jpg';
+    const defaultImg = 'https://t1.ftcdn.net/jpg/00/36/94/26/500_F_36942622_9SUXpSuE5JlfxLFKB1jHu5Z07eVIWQ2W.jpg';
+    // const defaultImg = 'https://cdn.vectorstock.com/i/composite/31,80/question-mark-vector-543180.jpg';
     let img = rowData.logo ? rowData.logo.url : defaultImg;
     console.log(img);
     return (
       <View style={styles.row}>
-        <Image
-          style={styles.rowLogo}
-          source={{uri: img}}
-        />
+        <TouchableOpacity
+          onPress={()=>this.detail(rowData)}
+        >
+          <Image
+            style={styles.rowLogo}
+            source={{uri: img}}
+          />
+        </TouchableOpacity>
         <View style={styles.rowDetails}>
           <Text>
             {
