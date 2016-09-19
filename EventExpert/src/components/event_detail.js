@@ -2,27 +2,39 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
-  StyleSheet
+  Image,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity
+
 } from 'react-native';
 
 module.exports = React.createClass({
   render(){
     return(
       <View style={styles.container}>
-        <Text>Event Details</Text>
-        <Text>{this.props.title}</Text>
-        <Text>{this.props.description}</Text>
-        <Text>{this.props.url}</Text>
-        <Text>{this.props.img}</Text>
-        <TouchableOpacity>
-          <Text
-            style={styles.link}
-            onPress={()=>this.props.navigator.popToTop(0)}
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={()=>{this.props.navigator.pop()}}
           >
-            Home
-          </Text>
-        </TouchableOpacity>
+            <Text style={styles.link}>Back</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text style={styles.link}>Full Details</Text>
+          </TouchableOpacity>
+
+        </View>
+        <View style={styles.body}>
+          <Image
+            style={styles.detailImg}
+            source={{uri: this.props.img}}
+          />
+          <Text style={styles.title}>{this.props.title}</Text>
+          <ScrollView style={styles.description}>
+            <Text>{this.props.description}</Text>
+          </ScrollView>
+        </View>
+
       </View>
     )
   }
@@ -31,11 +43,37 @@ module.exports = React.createClass({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff'
+  },
+  header: {
+    flex: 1,
+    flexDirection: 'row',
+    padding: 20,
+    justifyContent: 'space-between'
+  },
+  body:{
+    flex: 19,
     justifyContent: 'center',
     alignItems: 'center'
   },
   link: {
     color: 'blue',
     fontSize: 12
+  },
+  detailImg: {
+    height: 200,
+    width: 200,
+    borderRadius: 100,
+    borderColor: '#000',
+    borderWidth: 1
+  },
+  title:{
+    fontWeight: 'bold',
+    fontSize: 16,
+    textAlign: 'center',
+    padding: 5
+  },
+  description: {
+    padding: 10
   }
 });
