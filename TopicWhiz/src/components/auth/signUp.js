@@ -27,21 +27,18 @@ module.exports = React.createClass({
         <TextInput
           style={styles.input}
           placeholder="Password"
-          onChangeText={(text)=>{this.setState({password: text})}}
+          onChangeText={(text)=>this.setState({password: text})}
         />
       <TouchableOpacity style={styles.buttonContainer}>
-        <Text style={styles.button}>Sign In</Text>
+        <Text style={styles.button}>Sign Up</Text>
       </TouchableOpacity>
       <View style={styles.linkContainer}>
         <TouchableOpacity>
-          <Text style={styles.link}>Forget Password?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
           <Text
             style={styles.link}
-            onPress={()=>this.props.navigator.push({name:'signUp'})}
+            onPress={()=>this.props.navigator.pop()}
           >
-          Sign Up</Text>
+          Already a member? Sign in</Text>
         </TouchableOpacity>
       </View>
 
@@ -80,7 +77,7 @@ const styles = StyleSheet.create({
   },
   linkContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'center'
   },
   link: {
     color: '#0000FF',

@@ -4,9 +4,11 @@ import {
 } from 'react-native';
 
 import SignIn from './components/auth/signIn';
+import SignUp from './components/auth/signUp';
 
   const routes = {
-    signIn: SignIn
+    signIn: SignIn,
+    signUp: SignUp
   };
 
 module.exports = React.createClass({
