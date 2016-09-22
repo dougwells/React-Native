@@ -33,7 +33,7 @@ module.exports = React.createClass({
           <TouchableOpacity>
             <Text
               style={styles.link}
-              onPress={this.signOut}
+              onPress={()=>{this.signOut()}}
             >
               Sign out & return to sign in page
             </Text>

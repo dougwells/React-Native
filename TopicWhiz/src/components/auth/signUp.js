@@ -66,7 +66,7 @@ componentDidMount(){
         />
       <TouchableOpacity
         style={styles.buttonContainer}
-        onPress={this.signUp}
+        onPress={()=>{this.signUp()}}
         >
         <Text style={styles.button}>Sign Up</Text>
       </TouchableOpacity>
