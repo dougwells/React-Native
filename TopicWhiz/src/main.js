@@ -5,10 +5,12 @@ import {
 
 import SignIn from './components/auth/signIn';
 import SignUp from './components/auth/signUp';
+import Topics from './components/topics';
 
   const routes = {
     signIn: SignIn,
-    signUp: SignUp
+    signUp: SignUp,
+    topics: Topics
   };
 
 module.exports = React.createClass({
