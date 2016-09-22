@@ -44,5 +44,21 @@ module.exports = StyleSheet.create({
   feedback: {
     color: '#ff0000',
     textAlign: 'center'
+  },
+
+  //topics
+  topics: {
+    flex:1,
+    backgroundColor: blue,
+  },
+  header: {
+    flex:1,
+    flexDirection: 'row',
+    marginTop:20,
+    padding: 10,
+    justifyContent: 'space-between'
+  },
+  body: {
+    flex: 24
   }
 });

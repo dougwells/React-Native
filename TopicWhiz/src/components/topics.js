@@ -6,26 +6,44 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
+import {firebaseApp} from './auth/authentication';
+
 import styles from '../styles';
 
 module.exports = React.createClass({
+  getInitialState(){
+    return({
+      displayName: "Doug"
+    });
+  },
+
   signOut(){
     console.log("signOut invoked");
-    this.props.navigator.pop()
+    firebaseApp.auth().signOut()
+      .then(
+        (success)=>{ this.props.navigator.popToTop(); },
+        (error)=>{ console.log("Error in signout", error);}
+    );
   },
 
   render(){
     return (
-      <View style={styles.container}>
-        <Text>Topics Page</Text>
-        <TouchableOpacity>
-          <Text
-            style={styles.link}
-            onPress={this.signOut}
-          >
-            Return to signIn Page
+      <View style={styles.topics}>
+        <View style={styles.header}>
+          <TouchableOpacity>
+            <Text
+              style={styles.link}
+              onPress={this.signOut}
+            >
+              Sign out & return to sign in page
+            </Text>
+          </TouchableOpacity>
+          <Text style={styles.title}>
+            {this.state.displayName}
           </Text>
-        </TouchableOpacity>
+        </View>
+        <View style={styles.body}></View>
+
       </View>
     )
 
