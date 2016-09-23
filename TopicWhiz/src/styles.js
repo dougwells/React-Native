@@ -59,9 +59,28 @@ module.exports = StyleSheet.create({
     justifyContent: 'space-between'
   },
   body: {
-    flex: 24
+    flex: 24,
+    paddingRight: 20,
+    paddingLeft: 20
   },
   title:{
     textAlign: 'center'
+  },
+
+  //list section
+  list:{
+    flex:1
+  },
+  row:{
+    alignItems: 'center',
+    backgroundColor: white,
+    borderColor: black,
+    borderWidth: 1,
+    borderRadius: 5,
+    marginTop: 10,
+    padding: 5,
+  },
+  rowTitle: {
+    fontWeight: 'bold'
   }
 });

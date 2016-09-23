@@ -14,4 +14,5 @@ const config = {
   // const firebaseApp = firebase.initializeApp(config);
   // module.exports = firebaseApp;
 
-  export const firebaseApp = firebase.initializeApp(config);
+  export const firebaseApp  = firebase.initializeApp(config);
+  export const topicsRef    = firebase.database().ref();

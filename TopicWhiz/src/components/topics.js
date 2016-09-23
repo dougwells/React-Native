@@ -3,17 +3,25 @@ import {
   View,
   Text,
   TextInput,
+  ListView,
   TouchableOpacity,
 } from 'react-native';
 
-import {firebaseApp} from './auth/authentication';
-
+import {firebaseApp, topicsRef} from './auth/authentication';
 import styles from '../styles';
+
+const ds = new ListView.DataSource({rowHasChanged: (r1,r2)=>r1 !== r2});
+
 
 module.exports = React.createClass({
   getInitialState(){
     return({
-      name: "Doug"
+      name: "Doug",
+      title: "",
+      dataSource: ds.cloneWithRows([
+        {title:'Why is the sky blue?', author: 'Ted'}
+      ]),
+
     });
   },
 
@@ -22,8 +30,20 @@ module.exports = React.createClass({
     if(!user.displayName){
       this.chooseName();
     } else{
-      this.setState({name: user.displayName})
+      this.setState({name: user.displayName});
+      this.listenForItems(topicsRef);
     }
+  },
+
+  listenForItems(ref){
+    ref.on('value', (snap)=> {
+      let topics=[];
+      snap.forEach((topic)=>{
+        topics.push({title: topic.val().title, author: topic.val().author})
+      })
+      console.log("topics array", topics);
+      this.setState({dataSource: ds.cloneWithRows(topics)});
+    })
   },
 
   signOut(){
@@ -37,6 +57,19 @@ module.exports = React.createClass({
 
   chooseName(){
     this.props.navigator.push({name:'chooseName'})
+  },
+
+  renderRow (rowData){
+    return(
+      <View style={styles.row}>
+        <Text style={styles.rowTitle}>{rowData.title}</Text>
+        <Text>{rowData.author}</Text>
+      </View>
+    )
+  },
+
+  addTopic(){
+    topicsRef.push({title: this.state.title, author: this.state.name})
   },
 
   render(){
@@ -66,7 +99,21 @@ module.exports = React.createClass({
         </View>
 
         <View style={styles.body}>
+          <TextInput
+            style={styles.input}
+            placeholder="Something on your mind?"
+            onChangeText={(text)=>this.setState({title: text})}
+            onEndEditing={()=>this.addTopic()}
+          >
+          </TextInput>
+          <ListView
+            style={styles.list}
+            enableEmptySections={true}
+            dataSource={this.state.dataSource}
+            renderRow={(rowData)=>this.renderRow(rowData)}
+          >
 
+          </ListView>
         </View>
 
       </View>
