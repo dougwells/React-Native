@@ -6,12 +6,14 @@ import {
 import SignIn from './components/auth/signIn';
 import SignUp from './components/auth/signUp';
 import Topics from './components/topics';
+import TopicDetail from './components/topicDetail'
 import ChooseName from './components/auth/chooseName';
 
   const routes = {
     signIn: SignIn,
     signUp: SignUp,
     topics: Topics,
+    topicDetail: TopicDetail,
     chooseName: ChooseName
   };
 
@@ -28,8 +30,15 @@ module.exports = React.createClass({
 
   renderScene(route,navigator){
     let Component = routes[route.name];
+    let {displayName, title, author, row_uid} = route   //pass in as props for topic details
     return(
-      <Component navigator={navigator}/>
+      <Component
+        navigator={navigator}
+        displayName={displayName}
+        title={title}
+        author={author}
+        row_uid = {row_uid}
+        />
     );
   }
 });

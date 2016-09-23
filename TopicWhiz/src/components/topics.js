@@ -39,7 +39,11 @@ module.exports = React.createClass({
     ref.on('value', (snap)=> {
       let topics=[];
       snap.forEach((topic)=>{
-        topics.push({title: topic.val().title, author: topic.val().author})
+        topics.push({
+          title: topic.val().title,
+          author: topic.val().author,
+          key: topic.key
+        })
       })
       console.log("topics array", topics);
       this.setState({dataSource: ds.cloneWithRows(topics)});
@@ -59,12 +63,24 @@ module.exports = React.createClass({
     this.props.navigator.push({name:'chooseName'})
   },
 
+  details(data){
+    this.props.navigator.push({
+      name: 'topicDetail',
+      displayName: this.state.name,
+      title: data.title,
+      author: data.author,
+      row_uid: data.key,
+    })
+  },
+
   renderRow (rowData){
     return(
-      <View style={styles.row}>
+      <TouchableOpacity
+        onPress={()=>{this.details(rowData)}}
+        style={styles.row}>
         <Text style={styles.rowTitle}>{rowData.title}</Text>
         <Text>{rowData.author}</Text>
-      </View>
+      </TouchableOpacity>
     )
   },
 
@@ -74,7 +90,7 @@ module.exports = React.createClass({
 
   render(){
     return (
-      <View style={styles.topics}>
+      <View style={styles.flexContainer}>
 
         <View style={styles.header}>
           <TouchableOpacity>
