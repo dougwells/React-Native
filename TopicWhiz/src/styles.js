@@ -60,5 +60,8 @@ module.exports = StyleSheet.create({
   },
   body: {
     flex: 24
+  },
+  title:{
+    textAlign: 'center'
   }
 });

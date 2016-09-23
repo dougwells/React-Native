@@ -13,8 +13,17 @@ import styles from '../styles';
 module.exports = React.createClass({
   getInitialState(){
     return({
-      displayName: "Doug"
+      name: "Doug"
     });
+  },
+
+  componentDidMount(){
+    let user = firebaseApp.auth().currentUser;
+    if(!user.displayName){
+      this.chooseName();
+    } else{
+      this.setState({name: user.displayName})
+    }
   },
 
   signOut(){
@@ -40,7 +49,7 @@ module.exports = React.createClass({
               style={styles.link}
               onPress={()=>{this.signOut()}}
             >
-              Sign out & return to sign in page
+              Sign in page
             </Text>
           </TouchableOpacity>
           <TouchableOpacity>
@@ -48,11 +57,11 @@ module.exports = React.createClass({
               style={styles.link}
               onPress={()=>{this.chooseName()}}
             >
-              ChooseName
+              Change name
             </Text>
           </TouchableOpacity>
           <Text style={styles.title}>
-            {this.state.displayName}
+            {this.state.name}
           </Text>
         </View>
 
