@@ -26,9 +26,14 @@ module.exports = React.createClass({
     );
   },
 
+  chooseName(){
+    this.props.navigator.push({name:'chooseName'})
+  },
+
   render(){
     return (
       <View style={styles.topics}>
+
         <View style={styles.header}>
           <TouchableOpacity>
             <Text
@@ -38,11 +43,22 @@ module.exports = React.createClass({
               Sign out & return to sign in page
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity>
+            <Text
+              style={styles.link}
+              onPress={()=>{this.chooseName()}}
+            >
+              ChooseName
+            </Text>
+          </TouchableOpacity>
           <Text style={styles.title}>
             {this.state.displayName}
           </Text>
         </View>
-        <View style={styles.body}></View>
+
+        <View style={styles.body}>
+
+        </View>
 
       </View>
     )
