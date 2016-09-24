@@ -17,13 +17,15 @@ module.exports = React.createClass({
   getInitialState(){
     return {
       comment: "",
+      commentsRef: '',
       dataSource: ds.cloneWithRows('')
     }
   },
 
   componentDidMount(){
+    console.log('topicDetail componentDidMount triggered');
     const commentsRef = topicsRef.child(this.props.row_uid).child('comments');
-    console.log('commentsRef', commentsRef);  //gives you DB Object
+    this.setState({commentsRef: commentsRef})
     this.listenForItems(commentsRef);         //(NOT the comments object nor array)
                                               //Go to listenForItems to get comments array
   },
@@ -41,10 +43,10 @@ module.exports = React.createClass({
   },
 
   postComment(comment){
-    //1 get existing list of comments from FB
-    //2 push new comment onto the comment array
-    //3 push array onto FB
-    //4 re-render component w/completed array (ListView)
+    this.state.commentsRef.push({
+      comment: this.state.comment,
+      author: this.props.displayName
+    })
   },
 
   renderRow(data){
