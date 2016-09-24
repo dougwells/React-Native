@@ -46,7 +46,7 @@ module.exports = React.createClass({
     this.state.commentsRef.push({
       comment: this.state.comment,
       author: this.props.displayName
-    })
+    });
   },
 
   renderRow(data){
@@ -81,8 +81,13 @@ module.exports = React.createClass({
           <TextInput
             style={styles.input}
             placeholder="Any comment to share?"
+            value={this.state.comment}
             onChangeText={(text)=>this.setState({comment: text})}
-            onEndEditing={(text)=>this.postComment(text)}
+            onEndEditing={(text)=>{
+                this.postComment(text);
+                this.setState({comment: ''});
+              }
+            }
             ></TextInput>
             <ListView
               style={styles.list}
