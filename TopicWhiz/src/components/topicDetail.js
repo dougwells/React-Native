@@ -53,7 +53,7 @@ module.exports = React.createClass({
     return(
       <View style={styles.row}>
         <Text style={styles.comment}>{data.comment}</Text>
-        <Text>{data.author}</Text>
+        <Text style={styles.author}>{data.author}</Text>
 
       </View>
     )

@@ -8,13 +8,15 @@ import SignUp from './components/auth/signUp';
 import Topics from './components/topics';
 import TopicDetail from './components/topicDetail'
 import ChooseName from './components/auth/chooseName';
+import ForgotPassword from './components/auth/forgotPassword';
 
   const routes = {
     signIn: SignIn,
     signUp: SignUp,
     topics: Topics,
     topicDetail: TopicDetail,
-    chooseName: ChooseName
+    chooseName: ChooseName,
+    forgotPassword: ForgotPassword,
   };
 
 module.exports = React.createClass({

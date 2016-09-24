@@ -79,7 +79,7 @@ module.exports = React.createClass({
         onPress={()=>{this.details(rowData)}}
         style={styles.row}>
         <Text style={styles.rowTitle}>{rowData.title}</Text>
-        <Text>{rowData.author}</Text>
+        <Text style={styles.author}>{rowData.author}</Text>
       </TouchableOpacity>
     )
   },

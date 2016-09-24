@@ -36,7 +36,7 @@ module.exports = StyleSheet.create({
   },
   linkContainer: {
     flexDirection: 'row',
-    justifyContent: 'center'
+    justifyContent: 'space-between'
   },
   link: {
     color: navy,
@@ -97,5 +97,9 @@ module.exports = StyleSheet.create({
   //comments
   comments:{
     color: '#777'
+  },
+  author: {
+    color: '#0000FF',
+    fontWeight: '200'
   }
 });
