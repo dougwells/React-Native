@@ -92,5 +92,10 @@ module.exports = StyleSheet.create({
   detailSubtitle: {
     textAlign: 'center',
     fontSize: 14
+  },
+
+  //comments
+  comments:{
+    color: '#777'
   }
 });
