@@ -27,6 +27,8 @@ class AlbumList extends Component {
       <View>
         {this.renderAlbums()}
       </View>
+
+
     );
   }
 }
