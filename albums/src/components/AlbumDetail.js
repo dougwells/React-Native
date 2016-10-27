@@ -4,11 +4,14 @@ import {
   Text
 } from 'react-native';
 import Card from './Card';
+import CardSection from './CardSection';
 
 const AlbumDetail = (props)=>{
   return(
     <Card>
-      <Text>{props.album.title}</Text>
+      <CardSection>
+        <Text>{props.album.title}</Text>
+      </CardSection>
     </Card>
   );
 };
