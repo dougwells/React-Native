@@ -11,6 +11,7 @@ const AlbumDetail = (props)=>{
     <Card>
       <CardSection>
         <Text>{props.album.title}</Text>
+        <Text>{props.album.artist}</Text>
       </CardSection>
     </Card>
   );
