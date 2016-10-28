@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
+import Button from './Button';
 
 const AlbumDetail = (props)=>{
   // Destructure props into artist, title & image
@@ -25,12 +26,18 @@ const AlbumDetail = (props)=>{
           <Text>{artist}</Text>
         </View>
       </CardSection>
+
       <CardSection>
         <Image
           source={{uri:image}}
           style={styles.imageStyle}
         />
       </CardSection>
+
+      <CardSection>
+        <Button />
+      </CardSection>
+
     </Card>
   );
 };
