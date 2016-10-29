@@ -5,15 +5,13 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-const Button = () => {
+const Button = (props) => {
   return(
     <TouchableOpacity
         style={styles.buttonStyle}
-        onPress = {()=>
-          console.log("Pressed")
-        }
+        onPress = {props.onPress}
     >
-      <Text style={styles.textStyle}>Buy Now!</Text>
+      <Text style={styles.textStyle}>{props.children}</Text>
     </TouchableOpacity>
 
   );
