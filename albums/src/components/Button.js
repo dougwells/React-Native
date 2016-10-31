@@ -5,6 +5,16 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+const Button = (props) => {
+  return(
+    <TouchableOpacity
+        style={styles.buttonStyle}
+        onPress = {props.onPress}
+    >
+      <Text style={styles.textStyle}>{props.children}</Text>
+    </TouchableOpacity>
+)}
+
 const styles = {
   textStyle: {
     alignSelf: 'center',
